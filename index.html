@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Filius in de Browser</title>
-    <script src="https://cjrtnc.leaningtech.com/3.0/loader.js"></script>
+    <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
     <style>
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #f0f0f0; }
         #container { width: 100%; height: 100%; }
@@ -14,16 +14,17 @@
     <div id="container"></div>
 
     <script>
-        // Stap B: Initialiseer CheerpJ
-        cheerpjInit().then(function() {
-            // Stap C: Maak de grafische display aan binnen onze div
+        // UPDATE: CheerpJ 3.0 vereist een asynchrone start (async/await)
+        (async function() {
+            // Wacht tot CheerpJ volledig is opgestart
+            await cheerpjInit();
+            
+            // Maak het grafische scherm aan
             cheerpjCreateDisplay(window.innerWidth, window.innerHeight, document.getElementById("container"));
             
-            // Stap D: Start de Java applicatie
-            // Vervang 'filius.jar' als jouw hoofdbestand anders heet.
-            // '/app/' verwijst naar de map waar de bestanden op GitHub staan.
-            cheerpjRunMain("filius.Main", "/app/filius.jar");
-        });
+            // Start Filius (verwijzend naar jouw jsDelivr of lokale GitHub map)
+            await cheerpjRunMain("filius.Main", "/app/filius.jar");
+        })();
     </script>
 
 </body>
